@@ -21,6 +21,7 @@ button {
     background: #00b800;
     padding: 10px 20px;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 h1 {
