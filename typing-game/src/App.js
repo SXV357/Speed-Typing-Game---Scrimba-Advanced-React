@@ -1,53 +1,10 @@
-import React, {useState, useEffect, useRef} from "react"
+import React from "react"
+import useSpeedTyper from "./useSpeedTyper";
 import './style.css';
 
 export default function App() {
   const AVAILABLE_TIME = 10;
-
-  const [text, setText] = useState("");
-  const [startTimer, setStartTimer] = useState(false);
-  const [numWords, setNumWords] = useState(0)
-  const [timeRemaining, setTimeRemaining] = useState(AVAILABLE_TIME);
-  const textAreaElem = useRef(null);
-
-  function updateText(e){
-    const {value} = e.target;
-    setText(value);
-  }
-
-  function calculateNumWords(){
-    let wordArray = text.length > 0 ? text.split(" ").filter(word => word !== "") : [];
-    return wordArray.length;
-  }
-
-  function handleGame(){
-    setStartTimer(true);
-    if (timeRemaining === 0){
-      setText("");
-      setNumWords(0);
-      setStartTimer(true);
-      setTimeRemaining(AVAILABLE_TIME);
-    }
-  }
-
-  useEffect(() => {
-    textAreaElem.current.focus();
-  }, [startTimer])
-
-  useEffect(() => {
-    let countdownTimer = timeRemaining > 0 && startTimer && setTimeout(() => {
-      setTimeRemaining(prevRemaining => prevRemaining - 1)
-    }, 1000)
-
-    if (timeRemaining === 0){
-      setStartTimer(false);
-      setNumWords(calculateNumWords())
-    };
-
-    return () => {
-      clearTimeout(countdownTimer);
-    }
-  }, [timeRemaining, startTimer])
+  const [textAreaElem, text, updateText, startTimer, timeRemaining, handleGame, numWords] = useSpeedTyper(AVAILABLE_TIME);
 
   return (
     <div>
