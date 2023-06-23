@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from "react"
 
-export default function useSpeedTyper(time_limit){
+export default function useSpeedTyper(time_limit = 10){
     const [text, setText] = useState("");
     const [startTimer, setStartTimer] = useState(false);
     const [numWords, setNumWords] = useState(0)
